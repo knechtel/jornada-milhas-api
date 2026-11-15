@@ -1,26 +1,27 @@
 import {
   Controller,
   Get,
-  // Post,
-  // Body,
+  Post,
+  Body,
   // Patch,
   // Param,
   // Delete,
 } from '@nestjs/common';
 import { DepoimentosService } from './depoimentos.service';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { DepoimentoDto } from './dto/depoimento.dto';
-// import { CreateDepoimentoDto } from './dto/create-depoimento.dto';
+import { CreateDepoimentoDto } from './dto/create-depoimento.dto';
 // import { UpdateDepoimentoDto } from './dto/update-depoimento.dto';
 
 @Controller('depoimentos')
 export class DepoimentosController {
   constructor(private readonly depoimentosService: DepoimentosService) {}
 
-  // @Post()
-  // create(@Body() createDepoimentoDto: CreateDepoimentoDto) {
-  //   return this.depoimentosService.create(createDepoimentoDto);
-  // }
+  @Post()
+  @ApiCreatedResponse({ type: DepoimentoDto })
+  create(@Body() createDepoimentoDto: CreateDepoimentoDto) {
+    return this.depoimentosService.create(createDepoimentoDto);
+  }
 
   @Get()
   @ApiOkResponse({
